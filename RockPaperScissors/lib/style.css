@@ -121,8 +121,43 @@ button {
 }
 
 .sign {
-    font-size: 80px;
-    margin-bottom: 10px;
+    background-image: url("./icons/question-solid.svg");
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 160px;
+    background-position: center;
+    background-origin: content-box;
+    padding: 15px;
+}
+
+.rock {
+    background-image: url("./icons/hand-back-fist-regular.svg");
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 160px;
+    background-position: center;
+    background-origin: content-box;
+    padding: 15px;
+}
+
+.paper {
+    background-image: url("./icons/hand-regular.svg");
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 160px;
+    background-position: center;
+    background-origin: content-box;
+    padding: 15px;
+}
+
+.scissors {
+    background-image: url("./icons/hand-scissors-regular.svg");
+    background-repeat: no-repeat;
+    width: 160px;
+    height: 160px;
+    background-position: center;
+    background-origin: content-box;
+    padding: 15px;
 }
 
 /* FOOTER */

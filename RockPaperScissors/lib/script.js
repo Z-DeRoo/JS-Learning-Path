@@ -1,3 +1,8 @@
+
+let playerScore = 0
+let computerScore = 0
+let roundWinner = ''
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3)
     switch (randomNumber) {
@@ -21,45 +26,164 @@ function buttonClicked(buttonNumber) {
     }
 }
 
-// const playerSelection = prompt("ROCK PAPER OR SCISSORS")
 
 function playRound(playerSelection, computerSelection) {
 
     if (playerSelection === computerSelection) {
-        alert("Tie");
+        roundWinner = "tie"
     }
-    else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
-        alert("Paper beats Rock, you lose!");
+    if (
+        (playerSelection === "ROCK" && computerSelection === "PAPER") ||
+        (playerSelection === "SCISSORS" && computerSelection === "ROCK") ||
+        (playerSelection === "PAPER" && computerSelection === "SCISSORS")
+    ) {
+        computerScore++
+        roundWinner = "computer"
     }
-    else if (playerSelection === "ROCK" && computerSelection === "SCISSORS") {
-        alert("Rock beats Scissors, you win!");
+    if (
+        (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
+        (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
+        (playerSelection === "PAPER" && computerSelection === "Rock")
+    ) {
+        playerScore++
+        roundWinner = "player"
     }
-    else if (playerSelection === "SCISSORS" && computerSelection === "PAPER") {
-        alert("Scissors beats Paper, you win!");
-    }
-    else if (playerSelection === "SCISSORS" && computerSelection === "ROCK") {
-        alert("Rock beats Scissors, you lose!");
-    }
-    else if (playerSelection === "PAPER" && computerSelection === "Rock") {
-        alert("Paper beats Rock, you win!");
-    }
-    else if (playerSelection === "PAPER" && computerSelection === "SCISSORS") {
-        alert("Scissors beats Paper, you lose!");
-    }
+    updateScoreMessage(roundWinner, playerSelection, computerSelection)
+}
 
+function isGameOver() {
+    return playerScore === 5 || computerScore === 5
 }
 
 // UI
 const rockBtn = document.getElementById("rockBtn")
 const paperBtn = document.getElementById("paperBtn")
 const scissorsBtn = document.getElementById("scissorsBtn")
+const playerScorePara = document.getElementById("playerScore")
+const computerScorePara = document.getElementById("computerScore")
+const scoreInfo = document.getElementById("scoreInfo")
+const scoreMessage = document.getElementById("scoreMessage")
+const endGameModal = document.getElementById("endGameModal")
+const endGameMsg = document.getElementById("endGameMsg")
+const overlay = document.getElementById("overlay")
+const restartBtn = document.getElementById("restartBtn")
+const playerSign = document.getElementById("playerSign")
+const computerSign = document.getElementById("computerSign")
 
 rockBtn.addEventListener("click", () => handleClick("ROCK"))
 paperBtn.addEventListener("click", () => handleClick("PAPER"))
 scissorsBtn.addEventListener("click", () => handleClick("SCISSORS"))
+overlay.addEventListener("click", closeEndGameModal)
+restartBtn.addEventListener("click", restartGame)
 
 
 function handleClick(playerSelection) {
+    if (isGameOver()) {
+        openEndGameModal()
+        return
+    }
+
     const computerSelection = getComputerChoice()
     playRound(playerSelection, computerSelection)
+    updateScore()
+    updateIcon(playerSelection, computerSelection)
+
+    if (isGameOver()) {
+        openEndGameModal()
+        setFinalMsg()
+    }
+}
+
+function updateIcon(playerSelection, computerSelection) {
+    switch (playerSelection) {
+        case "ROCK":
+            playerSign.className = "rock"
+            break
+        case "PAPER":
+            playerSign.className = "paper"
+            break
+        case "SCISSORS":
+            playerSign.className = "scissors"
+            break
+    }
+
+    switch (computerSelection) {
+        case "ROCK":
+            computerSign.className = "rock"
+            break
+        case "PAPER":
+            computerSign.className = "paper"
+            break
+        case "SCISSORS":
+            computerSign.className = "scissors"
+            break
+    }
+}
+
+function updateScore() {
+    if (roundWinner === "tie") {
+        scoreInfo.textContent = "Its a Tie."
+    }
+    else if (roundWinner === "player") {
+        scoreInfo.textContent = "You Win!"
+    }
+    else if (roundWinner === "computer") {
+        scoreInfo.textContent = "You Lose."
+    }
+
+    playerScorePara.textContent = `Player: ${playerScore}`
+    computerScorePara.textContent = `Computer: ${computerScore}`
+}
+
+function updateScoreMessage(roundWinner, playerSelection, computerSelection) {
+    if (roundWinner === 'tie') {
+        scoreMessage.textContent = `${capitalizeFirstLetter(playerSelection)} ties with ${capitalizeFirstLetter(computerSelection)}`
+        return
+    }
+    else if (roundWinner === "player") {
+        scoreMessage.textContent = `${capitalizeFirstLetter(playerSelection)} beats ${capitalizeFirstLetter(computerSelection)}`
+        return
+    }
+    else if (roundWinner === "computer") {
+        scoreMessage.textContent = `${capitalizeFirstLetter(playerSelection)} loses to ${capitalizeFirstLetter(computerSelection)}`
+        return
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
+function openEndGameModal() {
+    endGameModal.classList.add("active")
+    overlay.classList.add("active")
+}
+
+function closeEndGameModal() {
+    endGameModal.classList.remove("active")
+    overlay.classList.remove("active")
+}
+
+function setFinalMsg() {
+    if (playerScore === 5) {
+        endGameMsg.textContent = "You Win!"
+    }
+    else if (computerScore === 5) {
+        endGameMsg.textContent = "You Lose."
+    }
+}
+
+
+function restartGame() {
+    playerScore = 0
+    computerScore = 0
+    scoreInfo.textContent = 'Choose your weapon'
+    scoreMessage.textContent = 'First to score 5 points wins the game'
+    playerScorePara.textContent = 'Player: 0'
+    computerScorePara.textContent = 'Computer: 0'
+    playerSign.className = "sign"
+    computerSign.className = "sign"
+    closeEndGameModal()
+
+
 }

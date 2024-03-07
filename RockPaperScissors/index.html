@@ -24,11 +24,11 @@
             </h3>
             <div class="scores-container">
                 <div class="score-box">
-                    <div class="sign" id="playerSign">❔</div>
+                    <div class="sign" id="playerSign"></div>
                     <p class="score" id="playerScore">Player: 0</p>
                 </div>
                 <div class="score-box">
-                    <div class="sign" id="computerSign">❔</div>
+                    <div class="sign" id="computerSign"></div>
                     <p class="score" id="computerScore">Computer: 0</p>
                 </div>
             </div>
@@ -36,16 +36,21 @@
 
         <div class="buttons">
             <button class="btn btn-square" id="rockBtn">
-                <div class="sign">R</div>
+                <div class="rock"></div>
             </button>
             <button class="btn btn-square" id="paperBtn">
-                <div class="sign">P</div>
+                <div class="paper"></div>
             </button>
             <button class="btn btn-square" id="scissorsBtn">
-                <div class="sign">S</div>
+                <div class="scissors"></div>
             </button>
         </div>
     </main>
+    <div class="modal" id="endGameModal">
+        <p class="modal-title" id="endGameMsg"></p>
+        <button class="btn btn-restart" id="restartBtn">Play again</button>
+    </div>
+    <div class="overlay" id="overlay"></div>
     <script src="lib/script.js"></script>
 </body>
 
