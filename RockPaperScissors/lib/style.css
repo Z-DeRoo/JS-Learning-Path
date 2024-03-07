@@ -90,7 +90,7 @@ button {
 
 .score {
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 22px;
     font-weight: bold;
 }
@@ -127,7 +127,7 @@ button {
     height: 160px;
     background-position: center;
     background-origin: content-box;
-    padding: 15px;
+    padding: 35px;
 }
 
 .rock {
