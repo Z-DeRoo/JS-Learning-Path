@@ -3,37 +3,50 @@
 <html>
 
 <head>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .button-container {
-            text-align: center;
-        }
-
-        .button-container button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="lib/style.css">
-
 </head>
 
 <body>
+    <header class="header">
+        <h1>Rock Paper Scissors</h1>
+    </header>
+    <main class="main">
+        <div class="scoreboard">
+            <h2 class="score-info" id="scoreInfo">Choose your weapon</h2>
+            <h3 class="score-message" id="scoreMessage">
+                First to score 5 points wins the game
+            </h3>
+            <div class="scores-container">
+                <div class="score-box">
+                    <div class="sign" id="playerSign">❔</div>
+                    <p class="score" id="playerScore">Player: 0</p>
+                </div>
+                <div class="score-box">
+                    <div class="sign" id="computerSign">❔</div>
+                    <p class="score" id="computerScore">Computer: 0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-square" id="rockBtn">
+                <div class="sign">R</div>
+            </button>
+            <button class="btn btn-square" id="paperBtn">
+                <div class="sign">P</div>
+            </button>
+            <button class="btn btn-square" id="scissorsBtn">
+                <div class="sign">S</div>
+            </button>
+        </div>
+    </main>
     <script src="lib/script.js"></script>
-    <div class="button-container">
-        <button id="rockBtn">ROCK</button>
-        <button id="paperBtn">PAPER</button>
-        <button id="scissorsBtn">SCISSORS</button>
-    </div>
 </body>
 
 </html>
